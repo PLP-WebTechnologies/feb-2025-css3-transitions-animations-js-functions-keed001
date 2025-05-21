@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="animateButton">Animate</button>
+<div id="targetElement">This text will fade in when you click the button!</div>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    .animated {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    <button id="animateButton">Animate</button>
+<div id="targetElement">This text will fade in when you click the button!</div>
+    // Function to store user preferences in localStorage
+function saveUserPreference(prefKey, prefValue) {
+    localStorage.setItem(prefKey, prefValue);
+}
+
+// Function to retrieve user preferences from localStorage
+function getUserPreference(prefKey) {
+    return localStorage.getItem(prefKey);
+}
+
+// Function to apply animation based on user action
+function triggerAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.classList.add('animated');
+    }
+}
+
+// Example Usage
+document.getElementById('animateButton').addEventListener('click', function() {
+    saveUserPreference('animationTriggered', 'true'); // Store user action
+    triggerAnimation('targetElement'); // Apply animation
+});
+
+// Check stored preference on page load
+window.onload = function() {
+    if (getUserPreference('animationTriggered') === 'true') {
+        triggerAnimation('targetElement');
+    }
+};
+
+</body>
+</html>
